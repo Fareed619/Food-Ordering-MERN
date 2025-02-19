@@ -1,6 +1,7 @@
 import express, {Request, Response, Application} from 'express';
 import cors from 'cors';
 import { configDotenv } from 'dotenv';
+import connectToDB from './config/db';
 
 configDotenv()
 
@@ -16,4 +17,5 @@ app.get("/test", async(req: Request, res:Response) => {
 
 app.listen(PORT, ()=>{
     console.log("Server statred on localhost: " + PORT)
+    connectToDB()
 })
