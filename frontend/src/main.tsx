@@ -4,6 +4,7 @@ import './index.css'
 import App from './App.tsx'
 import { createBrowserRouter, createRoutesFromElements, Navigate, Route, RouterProvider } from "react-router-dom"
 import Home from './pages/Home.tsx'
+import Auth0ProviderWithNavigate from './auth/Auth0ProviderWithNavigate.tsx'
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -17,6 +18,9 @@ const router = createBrowserRouter(
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-    <RouterProvider router={router}></RouterProvider>
+    <Auth0ProviderWithNavigate >
+      <RouterProvider router={router}>
+      </RouterProvider>
+    </Auth0ProviderWithNavigate>
   </StrictMode>,
 )
