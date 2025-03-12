@@ -1,20 +1,30 @@
 import { Link } from "react-router-dom"
 import { paddingX } from './../constants/style.js';
-import ButtonAuth from "./ButtonAuth.js";
+import Dropdown from "./Dropdown.js";
+import { useAuth0 } from "@auth0/auth0-react"
 
-type Props = {
 
-}
 
-const Header = ({ }: Props) => {
+const Header = () => {
+    const { loginWithRedirect, isAuthenticated } = useAuth0()
+
+
+    const loginClick = async () => {
+        await loginWithRedirect()
+    }
+
     return (
-        <div className="border-b-2 border-orange-500  h-20 pt-5 absolute bg-white top-0 w-full">
-            <nav className={`${paddingX} flex justify-between`}>
+        <header className="border-b-2 border-orange-500  h-18  absolute bg-white top-0 w-full z-10">
+            <nav className={`${paddingX} flex h-full justify-between items-center`}>
                 <Link to="/" > <h1 className="text-2xl font-semibold text-orange-600">FD Foody</h1></Link>
-                <ButtonAuth />
+                {!isAuthenticated ?
+                    <Dropdown />
+                    : <button className="text-orange-600 font-semibold p-2 cursor-pointer" onClick={loginClick} >Log In</button>}
+
+
             </nav>
 
-        </div>
+        </header>
     )
 }
 
