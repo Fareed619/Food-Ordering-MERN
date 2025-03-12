@@ -18,7 +18,7 @@ const Dropdown = () => {
 
     return (
         <div className="relative">
-            <button className="cursor-pointer text-orange-500" onClick={() => setShowDropDown(!showDropdown)} >
+            <button className="cursor-pointer text-orange-500 " onClick={() => setShowDropDown(!showDropdown)} >
                 {user?.picture ?
                     <img src={user?.picture} alt="picture" className="size-9 rounded-full inline-flex" /> : <CircleUserRound className="inline-block" size={25} />}
                 <span className="ml-1  text-lg font-medium"> {user?.name}</span>
