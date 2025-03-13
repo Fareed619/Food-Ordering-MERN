@@ -1,7 +1,8 @@
-import express, {Request, Response, Application} from 'express';
+import express, { Application} from 'express';
 import cors from 'cors';
 import { configDotenv } from 'dotenv';
 import connectToDB from './config/db';
+import userRoute from "./routes/user.route"
 
 configDotenv()
 
@@ -11,10 +12,8 @@ const PORT = process.env.PORT || 5000
 app.use(express.json())
 app.use(cors())
 
-app.get("/test", async(req: Request, res:Response) => {
-    res.json({message: "hello man!", state:"success"})
-})
-
+// Routes 
+app.use("/api/my/user", userRoute)
 app.listen(PORT, ()=>{
     console.log("Server statred on localhost: " + PORT)
     connectToDB()

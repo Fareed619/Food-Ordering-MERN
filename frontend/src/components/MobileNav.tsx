@@ -9,14 +9,15 @@ type Props = {
 
 const MobileNav = ({ closeMobileNav }: Props) => {
   const { isAuthenticated, loginWithRedirect, user } = useAuth0()
+  console.log(user)
   return (
     <aside className="fixed right-0  lg:hidden w-full sm:w-[50%] h-[100vh]  bg-white z-30 shadow p-4 transition-transform translate-0   starting:translate-x-[100vh] linear duration-400  
          transition-discrete">
       <div className="flex justify-between items-center">
         {isAuthenticated ?
           <div>
-            {user?.picture ?
-              <img src={user?.picture} alt="picture" className="size-9 rounded-full inline-flex" /> : <CircleUserRound className="inline-block" size={25} />}
+            {user?.picture &&
+              <img src={user?.picture} alt="picture" className="size-9 rounded-full inline-flex" />}
             <span className=" text-lg font-medium ml-1"> {user?.name}</span>
 
           </div>
