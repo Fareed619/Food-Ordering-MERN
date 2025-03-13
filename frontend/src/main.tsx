@@ -4,8 +4,8 @@ import './index.css'
 import App from './App.tsx'
 import { createBrowserRouter, createRoutesFromElements, Navigate, Route, RouterProvider } from "react-router-dom"
 import Home from './pages/Home.tsx'
-import Auth0ProviderWithNavigate from './auth/Auth0ProviderWithNavigate.tsx';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
+import AuthCallbackPage from './pages/AuthCallbackPage.tsx'
 
 
 const queryClient = new QueryClient({
@@ -24,18 +24,17 @@ const router = createBrowserRouter(
     <Route path='/' element={<App />}>
       <Route path='*' element={<Navigate to="/" />} />
       <Route path='/' element={<Home />} />
-
+      <Route path='/auth-callback' element={<AuthCallbackPage />} />
     </Route>
+
   )
 )
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <QueryClientProvider client={queryClient}>
-      <Auth0ProviderWithNavigate >
-        <RouterProvider router={router}>
-        </RouterProvider>
-      </Auth0ProviderWithNavigate>
+      <RouterProvider router={router}>
+      </RouterProvider>
     </QueryClientProvider>
   </StrictMode>,
 )

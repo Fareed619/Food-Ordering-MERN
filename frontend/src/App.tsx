@@ -3,6 +3,7 @@ import Header from "./components/Header";
 import { Toaster } from 'react-hot-toast';
 import { useState } from "react";
 import MobileNav from "./components/MobileNav";
+import Auth0ProviderWithNavigate from "./auth/Auth0ProviderWithNavigate";
 
 
 
@@ -15,17 +16,19 @@ const App = () => {
 
 
   return (
-    <div className="relative">
-      {showMobileNav && <div className="w-full h-screen backdrop-blur-md absolute top-0 z-20"></div>}
-      <Header showMobileNav={showMobileNav} setShowMobileNav={setShowMobileNav} />
-      {showMobileNav && (<MobileNav closeMobileNav={closeMobileNav} />)}
-      <main >
-        <Outlet />
-      </main>
-      <Toaster />
+    <Auth0ProviderWithNavigate >
+      <div className="relative">
+        {showMobileNav && <div className="w-full h-screen backdrop-blur-md absolute top-0 z-20"></div>}
+        <Header showMobileNav={showMobileNav} setShowMobileNav={setShowMobileNav} />
+        {showMobileNav && (<MobileNav closeMobileNav={closeMobileNav} />)}
+        <main >
+          <Outlet />
+        </main>
+        <Toaster />
+      </div>
+    </Auth0ProviderWithNavigate>
 
 
-    </div>
   )
 }
 
