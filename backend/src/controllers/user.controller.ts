@@ -47,3 +47,19 @@ export const updateUserProfileController = async (req:Request, res:Response):Pro
 
 }
 
+export const getUserProfileInfoController = async (req:Request, res: Response): Promise<any>  => {
+    console.log("here we go")
+    try {
+        const user = await User.findById(req.userId)
+        if(!user){
+            return res.status(400).json({message: "User not found"})
+        }
+        res.status(200).json(user)
+        
+    } catch (error) {
+        console.log("error in get user profile info controller "+ error)
+        res.status(500).json({message: "Something went wrong"})
+    }
+        
+
+}

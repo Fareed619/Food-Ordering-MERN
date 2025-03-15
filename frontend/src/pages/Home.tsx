@@ -21,7 +21,7 @@ const Home = () => {
 
 
     return (
-        <div >
+        <div className="min-h-screen">
             <div className="relative">
                 <img src={hero_img} alt="hero-img" className={`h-[40vh] sm:h-full  sm:max-h-[90vh] w-full -z-10 `} style={{ filter: `blur(${scale(load, 0, 100, 30, 0)}px)` }}
 
@@ -30,7 +30,7 @@ const Home = () => {
             </div>
             <div className="h-full md:h-[8rem]"> <SearchCardHome /> </div>
             <LandingHome />
-            <Footer />
+           
 
         </div>
     )

@@ -14,6 +14,7 @@ const Dropdown = () => {
     const logoutHandler = () => {
         logout()
         toast.success("Logged Out Successfully")
+        setShowDropDown(false)
     }
 
     return (
@@ -26,7 +27,7 @@ const Dropdown = () => {
             {showDropdown && (<ul className={` w-52 rounded-box bg-base-100 shadow-sm absolute top-12 right-0 p-2 transition-all 
             opacity-95 transition-discrete starting:opacity-0 duration-500`}
             >
-                <li className="font-medium hover:text-orange-500 hover:bg-gray-100 rounded p-1 transition-all duration-400 "><Link to="/user-profile">User Profile</Link></li>
+                <li className="font-medium hover:text-orange-500 hover:bg-gray-100 rounded p-1 transition-all duration-400 "><Link to="/user-profile" onClick={() => setShowDropDown(false)}>User Profile</Link></li>
                 <li className="font-medium cursor-pointer bg-orange-500 text-white rounded-lg mt-1 p-1 hover:bg-orange-600"><button onClick={logoutHandler}>Log Out</button></li>
             </ul>)}
 

@@ -4,6 +4,7 @@ import { Toaster } from 'react-hot-toast';
 import { useState } from "react";
 import MobileNav from "./components/MobileNav";
 import Auth0ProviderWithNavigate from "./auth/Auth0ProviderWithNavigate";
+import Footer from "./components/Footer";
 
 
 
@@ -24,6 +25,7 @@ const App = () => {
         <main >
           <Outlet />
         </main>
+        <Footer />
         <Toaster />
       </div>
     </Auth0ProviderWithNavigate>
