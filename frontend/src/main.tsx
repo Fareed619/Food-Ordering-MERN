@@ -7,6 +7,7 @@ import Home from './pages/Home.tsx'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import AuthCallbackPage from './pages/AuthCallbackPage.tsx'
 import Profile from './pages/Profile.tsx'
+import ProtectRoute from './components/ProtectRoute.tsx'
 
 
 const queryClient = new QueryClient({
@@ -25,8 +26,12 @@ const router = createBrowserRouter(
     <Route path='/' element={<App />}>
       <Route path='*' element={<Navigate to="/" />} />
       <Route path='/' element={<Home />} />
-      <Route path='/user-profile' element={<Profile />} />
       <Route path='/auth-callback' element={<AuthCallbackPage />} />
+      
+      <Route path='' element={<ProtectRoute />}>
+        <Route path='/user-profile' element={<Profile />} />
+
+      </Route>
     </Route>
 
   )

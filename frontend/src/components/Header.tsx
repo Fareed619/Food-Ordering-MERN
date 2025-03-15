@@ -23,7 +23,7 @@ const Header = ({ showMobileNav, setShowMobileNav }: Props) => {
     return (
         <header className="border-b-2 border-orange-500  h-18 absolute bg-white top-0 w-full z-10">
             <nav className={`${paddingX} flex h-full justify-between items-center`}>
-                <Link to="/" > <h1 className="text-2xl font-semibold text-orange-600">FD Foody</h1></Link>
+                <Link to="/" > <h1 className="text-3xl font-semibold text-orange-600">FD Foody</h1></Link>
                 <div className="hidden md:block">
                     {isAuthenticated ?
                         <Dropdown />

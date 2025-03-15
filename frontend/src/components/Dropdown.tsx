@@ -22,7 +22,7 @@ const Dropdown = () => {
             <button className="cursor-pointer text-orange-500 " onClick={() => setShowDropDown(!showDropdown)} >
                 {user?.picture ?
                     <img src={user?.picture} alt="picture" className="size-9 rounded-full inline-flex" /> : <CircleUserRound className="inline-block" size={25} />}
-                <span className="ml-1  text-lg font-medium"> {user?.name}</span>
+                <span className="ml-1  text-lg font-medium"> {user?.email}</span>
             </button>
             {showDropdown && (<ul className={` w-52 rounded-box bg-base-100 shadow-sm absolute top-12 right-0 p-2 transition-all 
             opacity-95 transition-discrete starting:opacity-0 duration-500`}

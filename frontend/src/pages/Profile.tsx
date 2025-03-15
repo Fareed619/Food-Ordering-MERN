@@ -41,7 +41,7 @@ const Profile = () => {
 
     return (
         <div className={`${paddingX} min-h-screen pt-25 `}>
-            {isGetLoading ? <Loader2 className={`animate-spin mx-auto size-12`} /> : !currentUser ? <h2 className='text-2xl font-bold text-center'>Unable to laod user profile</h2> : <>  <h1 className='text-4xl font-bold'>User Profile </h1>
+            {isGetLoading ? <Loader2 className={`animate-spin mx-auto size-12 text-orange-500`} /> : !currentUser ? <h2 className='text-2xl font-bold text-center'>Unable to laod user profile</h2> : <>  <h1 className='text-4xl font-bold'>User Profile </h1>
                 <p className='text-gray-500 text-lg my-2'>View and change your profile information here</p>
 
                 <form onSubmit={handleSubmit(onSubmit)} className='mt-16  flex flex-col gap-7'>

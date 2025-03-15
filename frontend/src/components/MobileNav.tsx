@@ -18,7 +18,7 @@ const MobileNav = ({ closeMobileNav }: Props) => {
           <div>
             {user?.picture &&
               <img src={user?.picture} alt="picture" className="size-9 rounded-full inline-flex" />}
-            <span className=" text-lg font-medium ml-1"> {user?.name}</span>
+            <span className=" text-lg font-medium ml-1"> {user?.email}</span>
 
           </div>
           : <h2 className="text-lg font-bold">Welcome to FD Foody!</h2>}
