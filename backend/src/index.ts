@@ -3,7 +3,7 @@ import cors from 'cors';
 import { configDotenv } from 'dotenv';
 import connectToDB from './config/db';
 import userRoute from "./routes/user.route"
-import restaruantRoute from "./routes/restaurant.route"
+import restaruantRoute from "./routes/myrestaurant.route"
 
 configDotenv()
 
