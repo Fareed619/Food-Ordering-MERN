@@ -1,4 +1,4 @@
-import { paddingX } from './../constants/style';
+import { paddingX } from '../constants/style';
 import { Search } from "lucide-react"
 
 const SearchCardHome = () => {

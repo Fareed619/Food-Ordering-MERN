@@ -5,7 +5,7 @@ const ProtectRoute = () => {
     const { isAuthenticated } = useAuth0()
     return (
         <>
-            {isAuthenticated ? <Outlet /> : <Navigate to="/" replace/>}
+            {isAuthenticated ? <Outlet /> : <Navigate to="/" />}
         </>
     )
 }

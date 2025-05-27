@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom"
-import { paddingX } from './../constants/style.js';
+import { paddingX } from '../constants/style.js';
 import Dropdown from "./Dropdown.js";
 import { useAuth0 } from "@auth0/auth0-react"
 import { List } from "lucide-react";

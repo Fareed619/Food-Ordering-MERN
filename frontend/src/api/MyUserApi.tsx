@@ -47,11 +47,11 @@ export const useCreateMyUser = () => {
         console.log(response.json())
     }
 
-    const { mutate: createUser, isLoading, isError, isSuccess } = useMutation({ mutationFn: createMyUserRequest })
+    const { mutate: createUser, isPending, isError, isSuccess } = useMutation({ mutationFn: createMyUserRequest })
 
     return {
         createUser,
-        isLoading,
+        isPending,
         isError,
         isSuccess
     }

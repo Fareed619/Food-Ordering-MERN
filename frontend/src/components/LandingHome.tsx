@@ -1,11 +1,11 @@
 import landing_img from "../assets/landing.png";
 import app_download from "../assets/appDownload.png"
-import { paddingX } from './../constants/style';
+import { paddingX } from '../constants/style';
 
 const LandingHome = () => {
   return (
     <div className={`${paddingX} w-full flex flex-col sm:flex-row gap-3 justify-between items-center my-2`}>
-      <div className="flex-1"> 
+      <div className="flex-1">
         <img src={landing_img} alt="" />
       </div>
 

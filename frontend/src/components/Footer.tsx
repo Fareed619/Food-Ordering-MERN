@@ -1,6 +1,6 @@
 
 import { Link } from 'react-router-dom';
-import { paddingX } from './../constants/style';
+import { paddingX } from '../constants/style';
 const Footer = () => {
     return (
         <footer className="w-full bg-orange-500 h-[13rem] mt-6">
