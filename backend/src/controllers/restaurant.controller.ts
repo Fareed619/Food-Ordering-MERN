@@ -1,77 +1,89 @@
 import { Request, Response } from "express";
 import Restaurant from "../models/restaurant.model";
-import { uploadToCloudinary } from "../utils/uploadToCloudinary";
-import mongoose from "mongoose";
 
-export const createMyRestaurantController = async (
+export const searchRestaurantController = async (
   req: Request,
   res: Response
 ): Promise<any> => {
   try {
-    const existingRestaurant = await Restaurant.findOne({ user: req.userId });
+    const city = req.params.city;
+    const searchQuery = (req.query.searchQuery as string) || "";
+    const selectedCuisines = (req.query.selectedCuisines as string) || "";
+    const sortOption = (req.query.sortOption as string) || "createdAt";
+    const page = parseInt(req.query.page as string) || 1;
 
-    if (existingRestaurant) {
-      return res
-        .status(409)
-        .json({ message: "User restaurant already exists" });
+    let query: any = {};
+    query["city"] = new RegExp(city, "i");
+
+    const cityCheck = await Restaurant.countDocuments(query);
+
+    if (cityCheck === 0) {
+      return res.status(404).json({
+        data: [],
+        pagination: {
+          total: 0,
+          page: 1,
+          pages: 1,
+        },
+      });
     }
 
-    const url = await uploadToCloudinary(req.file as Express.Multer.File);
-    const restaurant = new Restaurant(req.body);
-    restaurant.imageUrl = url;
-    restaurant.user = new mongoose.Types.ObjectId(req.userId);
-    restaurant.lastUpdated = new Date();
+    if (selectedCuisines) {
+      const cuisinesArray = selectedCuisines
+        .split(",")
+        .map((cuisine) => new RegExp(cuisine, "i"));
+      query["cuisines"] = { $all: cuisinesArray };
+    }
 
-    await restaurant.save();
-    res.status(201).json(restaurant);
+    if (searchQuery) {
+      const searchRegex = new RegExp(searchQuery, "i");
+      query["$or"] = [
+        { restaurantName: searchRegex },
+        { cuisines: { $in: [searchRegex] } },
+      ];
+    }
+
+    const pageSize = 10;
+    const skip = (page - 1) * pageSize;
+
+    // console.log("query coming ", query);
+    const restaruant = await Restaurant.find(query)
+      .sort({ [sortOption]: 1 })
+      .skip(skip)
+      .limit(pageSize)
+      .lean();
+
+    // console.log("res ", restaruant);
+    const total = await Restaurant.countDocuments(query);
+
+    const response = {
+      data: restaruant,
+      pagination: {
+        total,
+        page,
+        pages: Math.ceil(total / pageSize),
+      },
+    };
+    res.json(response);
   } catch (error) {
-    console.log("error in create my restaurant controller " + error);
+    console.log("error in search restaurant controller ", error);
     res.status(500).json({ message: "Something went wrong" });
   }
 };
 
-export const getMyRestaurantController = async (
+export const getRestaurantByIdController = async (
   req: Request,
   res: Response
 ): Promise<any> => {
   try {
-    const restaurant = await Restaurant.findOne({ user: req.userId });
+    const restaurantId = req.params.restaurantId;
+    const restaurant = await Restaurant.findById(restaurantId);
     if (!restaurant) {
       return res.status(404).json({ message: "Restaurant not found" });
     }
     res.status(200).json(restaurant);
   } catch (error) {
-    console.log("error in get my restaurant controller ", error);
-    res.status(500).json({ message: "Error fetching restaurant" });
-  }
-};
-
-export const updateMyRestaurantController = async (
-  req: Request,
-  res: Response
-): Promise<any> => {
-  try {
-    const existingRestaurant = await Restaurant.findOne({ user: req.userId });
-    if (!existingRestaurant) {
-      return res.status(404).json({ message: "Restaurant not found" });
-    }
-    if (req.file) {
-      const url = await uploadToCloudinary(req.file as Express.Multer.File);
-      existingRestaurant.imageUrl = url;
-    }
-    existingRestaurant.restaurantName = req.body.restaurantName;
-    existingRestaurant.city = req.body.city;
-    existingRestaurant.country = req.body.country;
-    existingRestaurant.deliveryPrice = req.body.deliveryPrice;
-    existingRestaurant.estimatedDeliveryTime = req.body.estimatedDeliveryTime;
-    existingRestaurant.cuisines = req.body.cuisines;
-    existingRestaurant.menuItems = req.body.menuItems;
-    existingRestaurant.lastUpdated = new Date();
-
-    await existingRestaurant.save();
-    return res.status(200).json(existingRestaurant);
-  } catch (error) {
-    console.log("error in update my restaurant controller ", error);
-    res.status(500).json({ message: "Failed to update restaurant" });
+    console.log("error in get restuarant by id controller " + error);
+    res.status(500).json({ message: "something went wrong" });
   }
 };

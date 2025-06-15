@@ -1,22 +1,30 @@
-import express, { Application} from 'express';
-import cors from 'cors';
-import { configDotenv } from 'dotenv';
-import connectToDB from './config/db';
-import userRoute from "./routes/user.route"
-import restaruantRoute from "./routes/myrestaurant.route"
+import express, { Application } from "express";
+import cors from "cors";
+import { configDotenv } from "dotenv";
+import connectToDB from "./config/db";
 
-configDotenv()
+// Routes
+import userRoute from "./routes/user.route";
+import myrestaruantRoute from "./routes/myrestaurant.route";
+import restaurantRoute from "./routes/restaurant.route";
+import orderRoute from "./routes/order.route";
 
-const app:Application = express();
-const PORT = process.env.PORT || 5000
+configDotenv();
 
-app.use(express.json())
-app.use(cors())
+const app: Application = express();
+const PORT = process.env.PORT || 5000;
 
-// Routes 
-app.use("/api/my/user", userRoute)
-app.use("/api/my/restaurant", restaruantRoute)
-app.listen(PORT, ()=>{
-    console.log("Server statred on localhost: " + PORT)
-    connectToDB()
-})
+app.use(cors());
+app.use("/api/order/checkout/webhook", express.raw({ type: "*/*" }));
+app.use(express.json());
+
+// Routes
+app.use("/api/my/user", userRoute);
+app.use("/api/my/restaurant", myrestaruantRoute);
+app.use("/api/restaurant", restaurantRoute);
+app.use("/api/order", orderRoute);
+
+app.listen(PORT, () => {
+  console.log("Server statred on localhost: " + PORT);
+  connectToDB();
+});

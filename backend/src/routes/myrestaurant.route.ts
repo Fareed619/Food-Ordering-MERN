@@ -3,7 +3,7 @@ import {
   createMyRestaurantController,
   getMyRestaurantController,
   updateMyRestaurantController,
-} from "../controllers/restaurant.controller";
+} from "../controllers/myrestaurant.controller";
 import { upload } from "../middlewares/multerStorage";
 import { validateMyRestaurantRequest } from "../middlewares/validation";
 import { jwtCheck, jwtParse } from "../middlewares/auth";

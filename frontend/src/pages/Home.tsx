@@ -21,7 +21,7 @@ const Home = () => {
     return (
         <div className="min-h-screen">
             <div className="relative">
-                <img src={hero_img} alt="hero-img" className={`h-[40vh] sm:h-full  sm:max-h-[90vh] w-full -z-10 `} style={{ filter: `blur(${scale(load, 0, 100, 30, 0)}px)` }}/>
+                <img src={hero_img} alt="hero-img" className={`h-[40vh] sm:h-full  sm:max-h-[90vh] w-full -z-10 object-cover`} style={{ filter: `blur(${scale(load, 0, 100, 30, 0)}px)` }}/>
                 <div className={`absolute top-[50%] left-[50%] translate-1/2 text-white text-xl z-10 `} style={{ opacity: scale(load, 0, 100, 1, 0) }}>{load}%</div>
             </div>
             <div className="h-full md:h-[8rem]"> <SearchCardHome /> </div>
