@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { paddingX } from "../constants/style";
 import ManageRestaurantForm from "../components/Restuarant/ManageRestaurantForm";
-const OrderStatus = () => {
+import Orders from "./Orders";
+const ManageRestaurantAndOrders = () => {
   const [showPage, setShowPage] = useState("orders");
 
   const showOrdersHandler = () => {
@@ -13,7 +14,7 @@ const OrderStatus = () => {
 
   return (
     <div className={`${paddingX} pt-22  min-h-screen mb-14`}>
-        {/* Toggle between two state in the page */}
+      {/* Toggle between two state in the page */}
       <div className="flex gap-2 bg-gray-200 w-fit p-1.5 rounded font-medium mb-6">
         <button
           className={`p-1.5  rounded cursor-pointer transition-all duration-300  ${
@@ -32,9 +33,16 @@ const OrderStatus = () => {
           Manage Restaurant
         </button>
       </div>
-      <ManageRestaurantForm />
+      {showPage === "orders" ? (
+        <>
+          {" "}
+          <Orders />
+        </>
+      ) : (
+        <ManageRestaurantForm />
+      )}
     </div>
   );
 };
 
-export default OrderStatus;
+export default ManageRestaurantAndOrders;

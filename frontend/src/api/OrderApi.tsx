@@ -1,6 +1,8 @@
 import { useAuth0 } from "@auth0/auth0-react";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import toast from "react-hot-toast";
+import { Restaurant } from "./MyRestaurantApi";
+import { User } from "./MyUserApi";
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
 export type CheckoutSessionRequest = {
@@ -20,6 +22,33 @@ export type CheckoutSessionRequest = {
 
 export type CheckoutSessionResponse = {
   url: string;
+};
+
+export type OrderStatus =
+  | "placed"
+  | "paid"
+  | "inProgress"
+  | "outForDelivery"
+  | "delivered";
+export type Order = {
+  _id: string;
+  restuarant: Restaurant;
+  user: User;
+  cartItems: {
+    menuItemId: string;
+    name: string;
+    quantity: string;
+  }[];
+  deliveryDelails: {
+    name: string;
+    addressLine1: string;
+    city: string;
+    email: string;
+  };
+  totalAmount: number;
+  status: OrderStatus;
+  createdAt: string;
+  restaurantId: string;
 };
 
 export const useCreateCheckoutSession = () => {
@@ -74,4 +103,39 @@ export const useCreateCheckoutSession = () => {
   });
 
   return { createCheckoutSession, isPending };
+};
+
+export const useGetMyOrders = () => {
+  const { getAccessTokenSilently } = useAuth0();
+
+  const getMyOrdersRequest = async (): Promise<Order[]> => {
+    try {
+      const accessToken = await getAccessTokenSilently();
+
+      const response = await fetch(`${API_BASE_URL}/api/order/myorder`, {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+          "Content-Type": "application/json",
+        },
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to get orders");
+      }
+
+      return response.json();
+    } catch (error) {
+      console.log("Error in get my orders request " + error);
+      return;
+    }
+  };
+
+  const { data: orders, isLoading } = useQuery({
+    queryKey: ["fetchMyOrders"],
+    queryFn: getMyOrdersRequest,
+    refetchInterval: 5000,
+  });
+
+  return { orders, isLoading };
 };

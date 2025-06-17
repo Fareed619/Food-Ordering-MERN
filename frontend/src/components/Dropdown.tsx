@@ -65,9 +65,14 @@ const Dropdown = () => {
             opacity-95 transition-discrete starting:opacity-0 duration-500`}
           ref={dropdownBoxRef}
         >
-          <Link to="/order-status" onClick={() => setShowDropDown(false)}>
+          <Link to="/manage-resturant" onClick={() => setShowDropDown(false)}>
             <li className="font-medium hover:text-orange-500 hover:bg-gray-100 rounded p-1 transition-all duration-400 ">
               Manage Restaurant
+            </li>
+          </Link>
+          <Link to="/order-status" onClick={() => setShowDropDown(false)}>
+            <li className="font-medium hover:text-orange-500 hover:bg-gray-100 rounded p-1 transition-all duration-400 ">
+              Order Status
             </li>
           </Link>
           <Link to="/user-profile" onClick={() => setShowDropDown(false)}>

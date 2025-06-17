@@ -14,10 +14,13 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import AuthCallbackPage from "./pages/AuthCallbackPage.tsx";
 import Profile from "./pages/Profile.tsx";
 import ProtectRoute from "./components/ProtectRoute.tsx";
-import OrderStatus from "./pages/OrderStatus.tsx";
+import OrderStatus from "./pages/ManageRestaurantAndOrders.tsx";
 import SearchPage from "./pages/SearchPage.tsx";
 import RestaurantDetails from "./pages/RestaurantDetails.tsx";
 import ProfilePage from "./pages/ProfilePage.tsx";
+import Orders from "./pages/ManageRestaurantAndOrders.tsx";
+import OrderStatusPage from "./pages/OrderStatusPage.tsx";
+import ManageRestaurantAndOrders from "./pages/ManageRestaurantAndOrders.tsx";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -33,9 +36,10 @@ const router = createBrowserRouter(
       <Route path="*" element={<Navigate to="/" />} />
       <Route path="/" element={<Home />} />
       <Route path="/auth-callback" element={<AuthCallbackPage />} />
-      <Route path="/order-status" element={<OrderStatus />} />
+      <Route path="/manage-resturant" element={<ManageRestaurantAndOrders />} />
       <Route path="/search/:city" element={<SearchPage />} />
       <Route path="/detail/:restaurantId" element={<RestaurantDetails />} />
+      <Route path="/order-status" element={<OrderStatusPage />} />
 
       <Route path="" element={<ProtectRoute />}>
         <Route path="/user-profile" element={<ProfilePage />} />

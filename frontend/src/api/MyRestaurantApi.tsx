@@ -1,6 +1,7 @@
 import { useAuth0 } from "@auth0/auth0-react";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import toast from "react-hot-toast";
+import { Order } from "./OrderApi";
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
@@ -24,6 +25,10 @@ export type Restaurant = {
   lastUpdated: string;
 };
 
+type UpdateOrderStatusRequest = {
+  orderId: string;
+  status: string;
+};
 export const useCreateMyRestaurant = () => {
   const { getAccessTokenSilently } = useAuth0();
 
@@ -144,4 +149,86 @@ export const useUpdateMyRestaurant = () => {
   }
 
   return { updateRestaurant, isPending };
+};
+
+export const useGetMyRestaurantOrders = () => {
+  const { getAccessTokenSilently } = useAuth0();
+
+  const getMyRestaurantOrdersRequest = async (): Promise<Order[]> => {
+    try {
+      const token = await getAccessTokenSilently();
+      const response = await fetch(`${API_BASE_URL}/api/my/restaurant/order`, {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+      });
+      if (!response.ok) {
+        throw new Error("Failed to fetch orders");
+      }
+      return response.json();
+    } catch (error) {
+      console.log("error in use get my restaurant orders " + error);
+      return;
+    }
+  };
+
+  const { data: orders, isLoading } = useQuery({
+    queryKey: ["fetchRestaurantOrders"],
+    queryFn: getMyRestaurantOrdersRequest,
+  });
+
+  return { orders, isLoading };
+};
+
+export const useUpdateMyRestaurantOrder = () => {
+  const { getAccessTokenSilently } = useAuth0();
+
+  const updateMyRestaurantOrderRequest = async (
+    updatedStatusOrderRequest: UpdateOrderStatusRequest
+  ) => {
+    try {
+      const token = await getAccessTokenSilently();
+      console.log("update status ", updatedStatusOrderRequest);
+
+      const response = await fetch(
+        `${API_BASE_URL}/api/my/restaurant/order/${updatedStatusOrderRequest.orderId}/status`,
+        {
+          method: "PUT",
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ status: updatedStatusOrderRequest.status }),
+        }
+      );
+      if (!response.ok) throw new Error("Failed to update status");
+      return response.json();
+    } catch (error) {
+      console.log("error in use update my restaurant order" + error);
+      return;
+    }
+  };
+
+  const {
+    mutateAsync: updateRestaurantStatus,
+    isPending,
+    isError,
+    isSuccess,
+    reset,
+  } = useMutation({
+    mutationFn: updateMyRestaurantOrderRequest,
+    onSuccess: () => {
+      // Use the onSuccess callback here
+      toast.success("Order updated");
+    },
+    onError: () => {
+      // Use onError for error handling
+      toast.error("Unable to update order ");
+      reset();
+    },
+  });
+
+  return { isPending, updateRestaurantStatus };
 };

@@ -3,6 +3,8 @@ import {
   createMyRestaurantController,
   getMyRestaurantController,
   updateMyRestaurantController,
+  getMyRestaurantOrdersController,
+  updatedOrderStatusController,
 } from "../controllers/myrestaurant.controller";
 import { upload } from "../middlewares/multerStorage";
 import { validateMyRestaurantRequest } from "../middlewares/validation";
@@ -23,6 +25,7 @@ router.post(
 // Get
 router.get("/", jwtCheck, jwtParse, getMyRestaurantController);
 
+router.get("/order", jwtCheck, jwtParse, getMyRestaurantOrdersController);
 // Update
 router.put(
   "/",
@@ -32,4 +35,12 @@ router.put(
   jwtParse,
   updateMyRestaurantController
 );
+
+router.put(
+  "/order/:orderId/status",
+  jwtCheck,
+  jwtParse,
+  updatedOrderStatusController
+);
+
 export default router;

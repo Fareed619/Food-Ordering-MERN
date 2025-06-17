@@ -43,7 +43,7 @@ const MobileNav = ({ closeMobileNav }: Props) => {
           Log In
         </button>
       ) : (
-        <MobileNavLinks />
+        <MobileNavLinks closeMobileNav={closeMobileNav} />
       )}
     </aside>
   );

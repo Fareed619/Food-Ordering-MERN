@@ -102,3 +102,19 @@ export const stripeWebhookHandlerController = async (
 
   res.status(200).send();
 };
+
+export const getMyOrdersController = async (
+  req: Request,
+  res: Response
+): Promise<any> => {
+  try {
+    const orders = await Order.find({ user: req.userId })
+      .populate("restuarant")
+      .populate("user");
+
+    res.json(orders);
+  } catch (error) {
+    console.log("error in get my orders controller " + error);
+    res.status(500).json({ message: "Something went wrong" });
+  }
+};
