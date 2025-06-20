@@ -1,4 +1,4 @@
-import express, { Application } from "express";
+import express, { Application, Request, Response } from "express";
 import cors from "cors";
 import { configDotenv } from "dotenv";
 import connectToDB from "./config/db";
@@ -17,6 +17,10 @@ const PORT = process.env.PORT || 5000;
 app.use(cors());
 app.use("/api/order/checkout/webhook", express.raw({ type: "*/*" }));
 app.use(express.json());
+
+app.get("/health", async (req: Request, res: Response) => {
+  res.send({ message: "Health Ok!" });
+});
 
 // Routes
 app.use("/api/my/user", userRoute);
