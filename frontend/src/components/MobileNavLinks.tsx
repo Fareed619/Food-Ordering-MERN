@@ -9,6 +9,13 @@ const MobileNavLinks = ({ closeMobileNav }: Props) => {
   return (
     <>
       <Link
+        to="/user-profile"
+        onClick={closeMobileNav}
+        className="font-medium hover:text-orange-500 hover:bg-gray-100 rounded p-1.5 transition-all duration-400 block "
+      >
+        User Profile
+      </Link>
+      <Link
         to="/manage-resturant"
         onClick={closeMobileNav}
         className="font-medium hover:text-orange-500 hover:bg-gray-100 rounded p-1.5 transition-all duration-400 block "
@@ -21,13 +28,6 @@ const MobileNavLinks = ({ closeMobileNav }: Props) => {
         className="font-medium hover:text-orange-500 hover:bg-gray-100 rounded p-1.5 transition-all duration-400 block "
       >
         Order Status
-      </Link>
-      <Link
-        to="/user-profile"
-        onClick={closeMobileNav}
-        className="font-medium hover:text-orange-500 hover:bg-gray-100 rounded p-1.5 transition-all duration-400 block "
-      >
-        User Profile
       </Link>
       <button
         className=" w-full font-medium cursor-pointer bg-orange-500 text-white rounded-lg mt-1 p-1 hover:bg-orange-600"

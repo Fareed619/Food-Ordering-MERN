@@ -7,7 +7,7 @@ import Auth0ProviderWithNavigate from "./auth/Auth0ProviderWithNavigate";
 import Footer from "./components/Footer";
 
 const App = () => {
-  const [showMobileNav, setShowMobileNav] = useState(false);
+  const [showMobileNav, setShowMobileNav] = useState<boolean>(false);
   const closeMobileNav = () => {
     setShowMobileNav(false);
   };

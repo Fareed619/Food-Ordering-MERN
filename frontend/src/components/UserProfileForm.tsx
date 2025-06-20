@@ -109,9 +109,14 @@ const UserProfileForm = ({
         </div>
         <button
           type="submit"
-          className="w-fit bg-orange-500 text-white p-2 px-6 rounded-lg shadow cursor-pointer "
+          disabled={isUpdatingUser}
+          className={`min-w-30   text-white p-2 px-6 rounded-lg shadow  ${
+            isUpdatingUser
+              ? "cursor-not-allowed bg-gray-400"
+              : "cursor-pointer bg-orange-500"
+          } `}
         >
-          {isUpdatingUser ? <Loader2 className="animate-spin" /> : buttonText}
+          {isUpdatingUser ? <Loader2 className="animate-spin w-fit mx-auto" /> : buttonText}
         </button>
       </form>
     </div>

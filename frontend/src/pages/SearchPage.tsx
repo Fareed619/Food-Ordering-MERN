@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { useSearchRestaurants } from "../api/RestaurantApi";
 import { Restaurant } from "../api/MyRestaurantApi";
 
@@ -88,10 +88,13 @@ const SearchPage = () => {
       </div>
     );
   }
-  if (!results?.data || !city) {
+  if (!results?.data.length || !city) {
     return (
       <div className={`${standartPage}  `}>
-        <h2 className="w-fit mx-auto font-bold text-2xl">No results found</h2>
+        <div className="w-fit mx-auto text-center">
+          <h2 className=" font-bold text-2xl">No results found</h2>
+          <Link to="/" className="underline font-semibold">Change Location</Link>
+        </div>
       </div>
     );
   }

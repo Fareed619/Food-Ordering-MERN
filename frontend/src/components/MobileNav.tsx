@@ -30,7 +30,7 @@ const MobileNav = ({ closeMobileNav }: Props) => {
           <h2 className="text-lg font-bold">Welcome to FD Foody!</h2>
         )}
         <X
-          className="text-gray-500 text-base cursor-pointer"
+          className="text-gray-500 text-base cursor-pointer "
           onClick={closeMobileNav}
         />
       </div>

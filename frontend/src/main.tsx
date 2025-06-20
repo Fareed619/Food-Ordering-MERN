@@ -1,7 +1,6 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import "./index.css";
-import App from "./App.tsx";
 import {
   createBrowserRouter,
   createRoutesFromElements,
@@ -11,14 +10,14 @@ import {
 } from "react-router-dom";
 import Home from "./pages/Home.tsx";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+
+// PAGES && COMPONENTS
+import App from "./App.tsx";
 import AuthCallbackPage from "./pages/AuthCallbackPage.tsx";
-import Profile from "./pages/Profile.tsx";
 import ProtectRoute from "./components/ProtectRoute.tsx";
-import OrderStatus from "./pages/ManageRestaurantAndOrders.tsx";
 import SearchPage from "./pages/SearchPage.tsx";
 import RestaurantDetails from "./pages/RestaurantDetails.tsx";
 import ProfilePage from "./pages/ProfilePage.tsx";
-import Orders from "./pages/ManageRestaurantAndOrders.tsx";
 import OrderStatusPage from "./pages/OrderStatusPage.tsx";
 import ManageRestaurantAndOrders from "./pages/ManageRestaurantAndOrders.tsx";
 

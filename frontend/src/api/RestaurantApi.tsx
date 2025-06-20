@@ -25,13 +25,13 @@ export const useSearchRestaurants = (
     return response.json();
   };
 
-  const { data: results, isLoading } = useQuery({
+  const { data: results, isLoading, refetch } = useQuery({
     queryKey: ["searchRestaurant", searchState],
     queryFn: createSearchRequest,
     enabled: !!city,
   });
 
-  return { isLoading, results };
+  return { isLoading, results, refetch };
 };
 
 export const useGetRestuarantById = (restaurantId?: string) => {

@@ -1,4 +1,3 @@
-import { useCallback } from "react";
 import { Order } from "../api/OrderApi";
 import { ORDER_STATUS } from "../utils/orderStatusPercentage";
 
@@ -17,7 +16,7 @@ const OrderStatusHeader = ({ order }: Props) => {
     const hours = created.getHours();
     const minutes = created.getMinutes();
 
-    const paddedMinutes = minutes < 10 ? `0 ${minutes}` : minutes;
+    const paddedMinutes = minutes < 10 ? `0${minutes}` : minutes;
     return `${hours}:${paddedMinutes}`;
   };
 

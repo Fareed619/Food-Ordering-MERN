@@ -1,6 +1,6 @@
 import { FormProvider, SubmitHandler, useForm } from "react-hook-form";
 import { Loader2 } from "lucide-react";
-import { useGetMyUserProfile, useUpdateMyUser } from "../api/MyUserApi";
+import { useGetMyUserProfile } from "../api/MyUserApi";
 import { useEffect } from "react";
 import UserProfileForm from "../components/UserProfileForm";
 
@@ -35,7 +35,7 @@ const Profile = ({
   });
 
   useEffect(() => {
-      if (currentUser) {
+    if (currentUser) {
       profileFormMethods.reset(currentUser);
     }
   }, [currentUser, profileFormMethods]);

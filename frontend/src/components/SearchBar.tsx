@@ -38,7 +38,7 @@ const SearchBar = ({ onSumbit, onReset, placeHolder, searchQuery }: Props) => {
   }, [searchQuery, reset]);
 
   const handleReset = () => {
-    form.reset({
+    reset({
       searchQuery: "",
     });
     if (onReset) {
@@ -72,7 +72,7 @@ const SearchBar = ({ onSumbit, onReset, placeHolder, searchQuery }: Props) => {
         )}
         <button
           type="submit"
-          className="py-1.5 px-4 cursor-pointer w-full mx-auto md:w-fit bg-orange-500 text-white rounded-full text-sm "
+          className="py-1.5 px-3 cursor-pointer w-full mx-auto md:w-fit bg-orange-500 text-white rounded-full text-sm "
         >
           Search
         </button>

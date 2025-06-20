@@ -91,22 +91,15 @@ export const useUpdateMyUser = () => {
     return response.json();
   };
 
-  const {
-    mutateAsync: updateUser,
-    isSuccess,
-    isPending,
-    error,
-    reset,
-  } = useMutation({ mutationFn: updateMyUserRequest });
-
-  if (isSuccess) {
-    toast.success("User Profile Updated!");
-  }
-  if (error) {
-    toast.error(error.message);
-    reset();
-  }
-
+  const { mutateAsync: updateUser, isPending } = useMutation({
+    mutationFn: updateMyUserRequest,
+    onSuccess: () => {
+      toast.success("User Profile Updated!");
+    },
+    onError: (error) => {
+      toast.error(error.message);
+    },
+  });
   return {
     updateUser,
     isPending,

@@ -11,10 +11,10 @@ const SearchCardHome = () => {
   };
   return (
     <div
-      className={`${paddingX}  bg-white p-4 rounded shadow-xl   -translate-y-15 md:-translate-y-27 lg:-translate-y-40`}
+      className={`${paddingX}  bg-white p-4 rounded shadow-xl -translate-y-15 md:-translate-y-27 lg:-translate-y-40`}
     >
       <div className="w-full p-2 pb-6">
-        <h2 className="text-center text-2xl md:text-4xl font-bold text-orange-600 ">
+        <h2 className="text-center text-xl md:text-2xl lg:text-4xl font-bold text-orange-600 ">
           Tuch into a takeaway today
         </h2>
         <p className="text-center text-base md:text-lg py-1">

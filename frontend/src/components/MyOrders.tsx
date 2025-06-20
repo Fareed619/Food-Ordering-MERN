@@ -57,8 +57,8 @@ const MyOrders = ({ cartItems, handleRemoveOrderClick, restaurant }: Props) => {
       </div>
       <hr className="text-gray-300" />
 
-      <CheckoutButton />
-      <DeliveryDetailsModal cartItems={cartItems} restaurant={restaurant}/>
+      <CheckoutButton disabled={cartItems.length === 0} />
+      <DeliveryDetailsModal cartItems={cartItems} restaurant={restaurant} />
     </div>
   );
 };

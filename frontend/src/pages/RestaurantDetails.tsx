@@ -69,6 +69,14 @@ const RestaurantDetails = () => {
     });
   };
 
+  if (!restaurantInfo) {
+    return (
+      <div className={`${standartPage}`}>
+        <h1>Unable to get restaurant Information</h1>
+      </div>
+    );
+  }
+
   return (
     <div className={`${standartPage}`}>
       {isLoading ? (
