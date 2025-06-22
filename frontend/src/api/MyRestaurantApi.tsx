@@ -51,7 +51,7 @@ export const useCreateMyRestaurant = () => {
       return response.json();
     } catch (error) {
       console.log("Error in my restaurant api ", error);
-      toast.error(error?.message);
+      return;
     }
   };
 
@@ -75,7 +75,7 @@ export const useCreateMyRestaurant = () => {
 export const useGetMyRestaurant = () => {
   const { getAccessTokenSilently } = useAuth0();
 
-  const getMyRestaurantRequest = async (): Promise<Restaurant> => {
+  const getMyRestaurantRequest = async (): Promise<Restaurant | undefined> => {
     try {
       const token = await getAccessTokenSilently();
       const response = await fetch(`${API_BASE_URL}/api/my/restaurant`, {
@@ -90,7 +90,6 @@ export const useGetMyRestaurant = () => {
       return response.json();
     } catch (error) {
       console.log("error in use get my resturant ", error);
-      toast.error(error.message);
       return;
     }
   };
@@ -154,7 +153,9 @@ export const useUpdateMyRestaurant = () => {
 export const useGetMyRestaurantOrders = () => {
   const { getAccessTokenSilently } = useAuth0();
 
-  const getMyRestaurantOrdersRequest = async (): Promise<Order[]> => {
+  const getMyRestaurantOrdersRequest = async (): Promise<
+    Order[] | undefined
+  > => {
     try {
       const token = await getAccessTokenSilently();
       const response = await fetch(`${API_BASE_URL}/api/my/restaurant/order`, {
@@ -214,8 +215,6 @@ export const useUpdateMyRestaurantOrder = () => {
   const {
     mutateAsync: updateRestaurantStatus,
     isPending,
-    isError,
-    isSuccess,
     reset,
   } = useMutation({
     mutationFn: updateMyRestaurantOrderRequest,

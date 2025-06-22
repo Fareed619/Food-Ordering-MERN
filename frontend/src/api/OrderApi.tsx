@@ -108,7 +108,7 @@ export const useCreateCheckoutSession = () => {
 export const useGetMyOrders = () => {
   const { getAccessTokenSilently } = useAuth0();
 
-  const getMyOrdersRequest = async (): Promise<Order[]> => {
+  const getMyOrdersRequest = async (): Promise<Order[] | undefined> => {
     try {
       const accessToken = await getAccessTokenSilently();
 

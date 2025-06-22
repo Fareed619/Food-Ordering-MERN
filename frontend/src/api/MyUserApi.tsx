@@ -26,7 +26,7 @@ export type User = {
   addressLine1: string;
 };
 
-const userFormSchema = z.object({
+export const userFormSchema = z.object({
   email: z.string().optional(),
   name: z.string().min(1, "name is required"),
   addressLine1: z.string().min(1, "Address Line 1 is required"),

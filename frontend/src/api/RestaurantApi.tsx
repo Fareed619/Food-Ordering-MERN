@@ -1,6 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
 import { RestaurantSearchResponse, SearchState } from "../pages/SearchPage";
-import toast from "react-hot-toast";
 import { Restaurant } from "./MyRestaurantApi";
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
@@ -25,7 +24,11 @@ export const useSearchRestaurants = (
     return response.json();
   };
 
-  const { data: results, isLoading, refetch } = useQuery({
+  const {
+    data: results,
+    isLoading,
+    refetch,
+  } = useQuery({
     queryKey: ["searchRestaurant", searchState],
     queryFn: createSearchRequest,
     enabled: !!city,
@@ -35,7 +38,7 @@ export const useSearchRestaurants = (
 };
 
 export const useGetRestuarantById = (restaurantId?: string) => {
-  const getRestuarnById = async (): Promise<Restaurant | null> => {
+  const getRestuarnById = async (): Promise<Restaurant | undefined> => {
     try {
       const response = await fetch(
         `${API_BASE_URL}/api/restaurant/${restaurantId}`
@@ -46,8 +49,7 @@ export const useGetRestuarantById = (restaurantId?: string) => {
       return response.json();
     } catch (error) {
       console.log("error in get restaurant by id ", error);
-      toast.error(error?.message);
-      return null;
+      return;
     }
   };
 
