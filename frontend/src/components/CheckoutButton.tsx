@@ -25,7 +25,7 @@ const CheckoutButton = ({ disabled }: { disabled: boolean }) => {
       {isAuthenticated ? (
         <button
           disabled={disabled}
-          onClick={() => document.getElementById("my_modal_2").showModal()}
+          onClick={() => (document.getElementById("my_modal_2") as HTMLDialogElement | null)?.showModal()}
           className={`w-full text-center font-semibold mt-5 mb-2 text-white rounded py-2 shadow-md outline-none ${
             disabled
               ? "cursor-not-allowed bg-gray-400"

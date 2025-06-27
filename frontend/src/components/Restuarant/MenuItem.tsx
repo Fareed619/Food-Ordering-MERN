@@ -3,7 +3,7 @@ import { restaurantFormData } from "./types";
 
 type Props = {
   index: number;
-  remove: () => void;
+  remove: (index: number) => void;
 };
 
 const MenuItem = ({ index, remove }: Props) => {

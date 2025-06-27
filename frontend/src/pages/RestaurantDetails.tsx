@@ -4,7 +4,7 @@ import { useGetRestuarantById } from "../api/RestaurantApi";
 import { Loader2, ShoppingCart } from "lucide-react";
 import MyOrders from "../components/MyOrders";
 import { MenuItem } from "../api/MyRestaurantApi";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 export type CardItem = MenuItem & {
   quantity: number;

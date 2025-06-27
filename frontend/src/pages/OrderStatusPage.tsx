@@ -3,7 +3,6 @@ import { useGetMyOrders } from "../api/OrderApi";
 import { standartPage } from "../constants/style";
 import OrderStatusHeader from "../components/OrderStatusHeader";
 import OrderStatusInfo from "../components/OrderStatusInfo";
-import Order from "./../../../backend/src/models/order.model";
 
 const OrderStatusPage = () => {
   const { isLoading, orders } = useGetMyOrders();

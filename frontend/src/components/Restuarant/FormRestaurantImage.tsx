@@ -15,7 +15,7 @@ const FormRestaurantImage = () => {
   const existingImg = watch("imageUrl");
 
   const onDrop = useCallback(
-    async (acceptedFiles) => {
+    async (acceptedFiles: File[]) => {
       const file = acceptedFiles[0];
 
       // Check if the file is an image

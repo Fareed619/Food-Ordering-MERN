@@ -1,4 +1,4 @@
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { useSearchRestaurants } from "../api/RestaurantApi";
 import { Restaurant } from "../api/MyRestaurantApi";
 
@@ -65,14 +65,14 @@ const SearchPage = () => {
   };
 
   // TODO: FIND PLACE IN THE UI TO PUT THAT BUTTON
-  const resetAllOptions = () => {
-    setSearchState((prev) => ({
-      ...prev,
-      page: 1,
-      selectedCuisines: [],
-      sortOption: "bestMatch",
-    }));
-  };
+  // const resetAllOptions = () => {
+  //   setSearchState((prev) => ({
+  //     ...prev,
+  //     page: 1,
+  //     selectedCuisines: [],
+  //     sortOption: "bestMatch",
+  //   }));
+  // };
   const resetSearch = () => {
     setSearchState((prev) => ({
       ...prev,
