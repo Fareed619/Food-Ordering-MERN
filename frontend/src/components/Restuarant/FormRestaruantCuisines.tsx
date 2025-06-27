@@ -16,7 +16,9 @@ const FormRestaruantCuisines = () => {
     const updated = checked
       ? [...selectedCuisines, cuisine]
       : selectedCuisines.filter((item) => item !== cuisine);
-    setValue("cuisines", updated);
+    if (updated.length > 0) {
+      setValue("cuisines", updated as [string, ...string[]]);
+    }
   };
 
   return (

@@ -9,7 +9,11 @@ const PaginationSelector = ({ page, pages, onPageChange }: Props) => {
   for (let i = 1; i <= pages; i++) {
     pageNumber.push(i);
   }
-  const handlePageClick = (event) => {
+  interface PageClickEvent {
+    selected: number;
+  }
+
+  const handlePageClick = (event: PageClickEvent) => {
     onPageChange(event.selected + 1);
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
