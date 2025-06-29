@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 
 const Dropdown = () => {
   const [showDropdown, setShowDropDown] = useState(false);
-  const { user, logout } = useAuth0();
+  const { user, logout, isLoading } = useAuth0();
 
   const dropdownBoxRef = useRef<HTMLUListElement | null>(null);
   const buttonRef = useRef<HTMLButtonElement | null>(null);
@@ -46,12 +46,8 @@ const Dropdown = () => {
         onClick={() => setShowDropDown(!showDropdown)}
         ref={buttonRef}
       >
-        {user?.picture ? (
-          <img
-            src={user?.picture}
-            alt="picture"
-            className="size-9 rounded-full inline-flex"
-          />
+        {!isLoading && user && user.picture ? (
+          <img src={user?.picture} alt="picture" className="size-9 rounded-full inline-flex" />
         ) : (
           <CircleUserRound className="inline-block" size={25} />
         )}
