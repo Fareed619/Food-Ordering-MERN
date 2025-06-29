@@ -3,16 +3,14 @@ import { CheckoutSessionRequest } from "../controllers/order.controller";
 import { MenuItemType } from "../models/restaurant.model";
 
 const STRIPE = new Stripe(process.env.STRIPE_API_KEY as string);
-const FRONTEND_URL = process.env.FRONTEND_URL as string;
+const FRONTEND_URL =
+  process.env.NODE_ENV === "development"
+    ? (process.env.FRONTEND_URL as string)
+    : (process.env.FRONTEND_URL_PRO as string);
 
-export const createLineItems = (
-  checkoutSessionRequest: CheckoutSessionRequest,
-  menuItems: MenuItemType[]
-): any => {
+export const createLineItems = (checkoutSessionRequest: CheckoutSessionRequest, menuItems: MenuItemType[]): any => {
   const lineItems = checkoutSessionRequest.cartItems.map((cartItem) => {
-    const menuItem = menuItems.find(
-      (item) => item._id.toString() === cartItem.menuItemId.toString()
-    );
+    const menuItem = menuItems.find((item) => item._id.toString() === cartItem.menuItemId.toString());
 
     if (!menuItem) {
       throw new Error("Menu item not found: " + cartItem.menuItemId);
