@@ -1,6 +1,9 @@
 import Stripe from "stripe";
 import { CheckoutSessionRequest } from "../controllers/order.controller";
 import { MenuItemType } from "../models/restaurant.model";
+import { configDotenv } from "dotenv";
+
+configDotenv();
 
 const STRIPE = new Stripe(process.env.STRIPE_API_KEY as string);
 const FRONTEND_URL =
