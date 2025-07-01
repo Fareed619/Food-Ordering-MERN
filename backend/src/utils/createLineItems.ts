@@ -10,7 +10,6 @@ const FRONTEND_URL =
   process.env.NODE_ENV === "development"
     ? (process.env.FRONTEND_URL as string)
     : (process.env.FRONTEND_URL_PRO as string);
-
 export const createLineItems = (checkoutSessionRequest: CheckoutSessionRequest, menuItems: MenuItemType[]): any => {
   const lineItems = checkoutSessionRequest.cartItems.map((cartItem) => {
     const menuItem = menuItems.find((item) => item._id.toString() === cartItem.menuItemId.toString());
