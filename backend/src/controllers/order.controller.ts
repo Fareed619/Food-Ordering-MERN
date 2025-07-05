@@ -23,16 +23,12 @@ export type CheckoutSessionRequest = {
   resturantId: string;
 };
 
-export const createCheckoutSessionController = async (
-  req: Request,
-  res: Response
-): Promise<any> => {
+export const createCheckoutSessionController = async (req: Request, res: Response): Promise<any> => {
   try {
     const checkoutSessionRequest: CheckoutSessionRequest = req.body;
+    console.log("hello there is a backend");
 
-    const restaurant = await Restaurant.findById(
-      checkoutSessionRequest.resturantId
-    );
+    const restaurant = await Restaurant.findById(checkoutSessionRequest.resturantId);
 
     if (!restaurant) {
       throw new Error("Restaurant not found");
@@ -47,10 +43,7 @@ export const createCheckoutSessionController = async (
       createdAt: new Date(),
     });
 
-    const lineItems = createLineItems(
-      checkoutSessionRequest,
-      restaurant.menuItems
-    );
+    const lineItems = createLineItems(checkoutSessionRequest, restaurant.menuItems);
 
     const session = await createSession(
       lineItems,
@@ -64,6 +57,7 @@ export const createCheckoutSessionController = async (
     }
 
     await newOrder.save();
+    console.log(session.url);
     res.json({ url: session.url });
   } catch (error: any) {
     console.log("error in create checkout session controller " + error);
@@ -71,18 +65,11 @@ export const createCheckoutSessionController = async (
   }
 };
 
-export const stripeWebhookHandlerController = async (
-  req: Request,
-  res: Response
-): Promise<any> => {
+export const stripeWebhookHandlerController = async (req: Request, res: Response): Promise<any> => {
   let event;
   try {
     const sig = req.headers["stripe-signature"];
-    event = STRIPE.webhooks.constructEvent(
-      req.body,
-      sig as string,
-      STRIPE_ENDPOINT_SECRET
-    );
+    event = STRIPE.webhooks.constructEvent(req.body, sig as string, STRIPE_ENDPOINT_SECRET);
   } catch (error: any) {
     console.log("error in stripe webhook cotroller " + error);
     return res.status(400).send(`Webhook error: ${error.message}`);
@@ -103,14 +90,9 @@ export const stripeWebhookHandlerController = async (
   res.status(200).send();
 };
 
-export const getMyOrdersController = async (
-  req: Request,
-  res: Response
-): Promise<any> => {
+export const getMyOrdersController = async (req: Request, res: Response): Promise<any> => {
   try {
-    const orders = await Order.find({ user: req.userId })
-      .populate("restuarant")
-      .populate("user");
+    const orders = await Order.find({ user: req.userId }).populate("restuarant").populate("user");
 
     res.json(orders);
   } catch (error) {
