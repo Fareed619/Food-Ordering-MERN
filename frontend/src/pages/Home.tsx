@@ -9,14 +9,12 @@ const Home = () => {
   return (
     <div className="min-h-screen">
       <div className="relative">
-        <div className="h-[40vh] sm:h-full  sm:max-h-[90vh] w-full">
-          <img
-            src={hero_img}
-            alt="hero-img"
-            className={`-z-10 object-cover`}
-            style={{ filter: `blur(${scale(load, 0, 100, 30, 0)}px)` }}
-          />
-        </div>
+        <img
+          src={hero_img}
+          alt="hero-img"
+          className={`h-[50vh] md:h-[70vh] lg:h-[90vh] w-full -z-10 object-cover`}
+          style={{ filter: `blur(${scale(load, 0, 100, 30, 0)}px)` }}
+        />
 
         <div
           className={`absolute top-[50%] left-[50%] translate-1/2 text-white text-xl z-10 `}

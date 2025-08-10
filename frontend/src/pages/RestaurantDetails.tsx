@@ -69,7 +69,7 @@ const RestaurantDetails = () => {
     });
   };
 
-  if (!restaurantInfo) {
+  if (!restaurantInfo && !isLoading) {
     return (
       <div className={`${standartPage}`}>
         <h1>Unable to get restaurant Information</h1>
