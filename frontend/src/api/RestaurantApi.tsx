@@ -37,7 +37,7 @@ export const useSearchRestaurants = (
   return { isLoading, results, refetch };
 };
 
-export const useGetRestuarantById = (restaurantId?: string) => {
+export const useGetRestaurantById = (restaurantId?: string) => {
   const getRestuarnById = async (): Promise<Restaurant | undefined> => {
     try {
       const response = await fetch(
